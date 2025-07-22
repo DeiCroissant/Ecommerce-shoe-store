@@ -18,6 +18,9 @@
 
     <section id="header">
         <a href="#"><img src="logo.png"  class="logo" alt=""></a>
+        <div id="hamburger" class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
         <div>
             <ul id="navbar">
                 <li><a class="active" href="index.html">Home</a></li>
@@ -438,8 +441,8 @@
       <div class="modal-content">
         <span class="close" id="close-login-modal">&times;</span>
         <div class="tab">
-          <button class="tablinks active" onclick="openTab(event, 'login')">Đăng nhập</button>
-          <button class="tablinks" onclick="openTab(event, 'register')">Đăng ký</button>
+          <button class="tablinks active" data-tab="login">Đăng nhập</button>
+          <button class="tablinks" data-tab="register">Đăng ký</button>
         </div>
         <div id="login" class="tabcontent" style="display:block;">
           <form id="login-form">
@@ -498,5 +501,8 @@
     var registerForm = document.getElementById('register-form');
     if (registerForm) registerForm.onsubmit = function(e) { e.preventDefault(); alert('Đăng ký thành công (demo)!'); document.getElementById('login-modal').style.display = 'none'; };
     </script>
+
+    <!-- Nút back to top -->
+    <button id="backToTop" class="back-to-top">↑</button>
 </body>
 </html>

@@ -555,7 +555,7 @@ body {
 #prodetails .single-pro-details select {
     display: block;
     padding: 5px 10px;
-    margin-bottom: 10px;
+    margin: 20px 0 20px 0; /* Thêm margin trên và dưới cho đều */
 }
 
 #prodetails .single-pro-details input {
@@ -1076,6 +1076,22 @@ footer .copyright {
     font-size: 13px;
   }
 }
+
+.hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.hamburger span { width: 25px; height: 3px; background: #222; border-radius: 2px; display: block; }
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+  #navbar { position: fixed; top: 0; right: -100%; width: 220px; height: 100vh; background: #fff; flex-direction: column; transition: right 0.3s; z-index: 1001; }
+  #navbar.open { right: 0; }
+}
+
+.back-to-top {
+  position: fixed; right: 24px; bottom: 32px; z-index: 999;
+  background: #088178; color: #fff; border: none; border-radius: 50%;
+  width: 44px; height: 44px; font-size: 22px; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.back-to-top.show { opacity: 1; pointer-events: auto; }
 
 
 /* Modal đăng nhập/đăng ký với 2 tab, tông cam */

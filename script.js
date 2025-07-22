@@ -15,9 +15,18 @@ function addToCart(product) {
 
 // Gắn sự kiện cho nút giỏ hàng ở shop.html và các trang có .pro
 function setupAddToCartButtons() {
-  document.querySelectorAll('.fa-cart-plus, .fa-shopping-cart.cart').forEach(btn => {
+  document.querySelectorAll('.fa-cart-plus, .fa-shopping-cart.cart, .ri-shopping-cart-line.cart').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
+      // Check login status
+      let user = getUserInfo && getUserInfo();
+      if (!user) {
+        // Show login/register modal
+        let modal = document.getElementById('login-modal');
+        if (modal) modal.style.display = 'block';
+        alert('Vui lòng đăng nhập hoặc đăng ký để thêm sản phẩm vào giỏ hàng!');
+        return;
+      }
       let pro = this.closest('.pro');
       if (!pro) return;
       let name = pro.querySelector('.desc h5') ? pro.querySelector('.desc h5').innerText : '';
@@ -170,6 +179,13 @@ document.addEventListener('DOMContentLoaded', function() {
   updateCartCount();
   // Hiển thị tên user nếu đã đăng nhập
   showUserName();
+  // Gắn sự kiện cho nút Shop now chuyển hướng sang shop.html
+  var shopNowBtn = document.querySelector('#hero button');
+  if (shopNowBtn) {
+    shopNowBtn.addEventListener('click', function() {
+      window.location.href = 'shop.html';
+    });
+  }
   // Lưu user khi đăng nhập (demo)
   let loginForm = document.getElementById('login-form');
   if (loginForm) {
@@ -194,4 +210,78 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('Đăng ký thành công!');
     };
   }
+  // Gắn sự kiện chuyển tab cho modal đăng nhập/đăng ký
+  var tabBtns = document.querySelectorAll('.tab button.tablinks');
+  tabBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(evt) {
+      var tabName = btn.getAttribute('data-tab');
+      var tabcontent = document.getElementsByClassName('tabcontent');
+      for (var i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = 'none';
+      var tablinks = document.getElementsByClassName('tablinks');
+      for (var i = 0; i < tablinks.length; i++) tablinks[i].classList.remove('active');
+      document.getElementById(tabName).style.display = 'block';
+      btn.classList.add('active');
+    });
+  });
+  // Gắn sự kiện cho nút Add To Cart ở trang sproduct.html
+  var addToCartBtn = document.querySelector('.single-pro-details button.normal');
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Check login status
+      let user = getUserInfo && getUserInfo();
+      if (!user) {
+        let modal = document.getElementById('login-modal');
+        if (modal) modal.style.display = 'block';
+        alert('Vui lòng đăng nhập hoặc đăng ký để thêm sản phẩm vào giỏ hàng!');
+        return;
+      }
+      // Validate chọn size
+      let proDetails = document.querySelector('.single-pro-details');
+      let sizeSelect = proDetails.querySelector('select');
+      let size = sizeSelect ? sizeSelect.value : '';
+      if (!size || size === 'Chọn size' || size === 'Select Size') {
+        alert('Vui lòng chọn size trước khi thêm vào giỏ hàng!');
+        sizeSelect && sizeSelect.focus();
+        return;
+      }
+      // Lấy thông tin sản phẩm chi tiết
+      let name = proDetails.querySelector('h4') ? proDetails.querySelector('h4').innerText : '';
+      let price = proDetails.querySelector('h2') ? parseFloat(proDetails.querySelector('h2').innerText.replace(/[^\d.]/g, '')) : 0;
+      let image = document.getElementById('MainImg') ? document.getElementById('MainImg').getAttribute('src') : '';
+      let qtyInput = proDetails.querySelector('input[type=number]');
+      let quantity = qtyInput ? parseInt(qtyInput.value) : 1;
+      let id = name + price + image + size;
+      addToCart({id, name, price, image, quantity, size});
+    });
+  }
+  // Hamburger menu cho mobile
+  var hamburger = document.getElementById('hamburger');
+  var navbar = document.getElementById('navbar');
+  if (hamburger && navbar) {
+    hamburger.addEventListener('click', function() {
+      navbar.classList.toggle('open');
+    });
+  }
+  // Back-to-top button
+  var backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+  // Smooth scroll tới anchor
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
 });
