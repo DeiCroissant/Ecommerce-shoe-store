@@ -220,22 +220,77 @@ body {
     text-align: center;
 }
 
+/* --- SỬA LẠI CSS SẢN PHẨM: ICON GIỎ HÀNG ĐÚNG VỊ TRÍ --- */
 #product1 .pro {
-    width: 23%;
-    min-width: 250px;
-    padding: 10px 12px;
-    border: 1px solid #cce7d0;
-    border-radius: 25px;
-    cursor: pointer;
-    box-shadow: 20px 20px 30px rgb(0, 0, 0, 0.02);
-    margin: 15px 0;
-    transition: .3s ease;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 25px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 16px 16px 20px 16px;
+  margin-bottom: 40px;
+  border: none !important;
+  overflow: hidden;
+}
+#product1 .pro .desc {
+  min-height: 90px; /* Điều chỉnh cho phù hợp với số dòng dài nhất */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+}
+#product1 .pro-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+#product1 .pro .desc h4 {
+  color: #088178;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+#product1 .pro a {
+  position: static !important;
+  margin-left: 8px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+}
+#product1 .pro .cart {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background: #e8f6ea;
+  color: #088178;
+  border: 1px solid #cce7d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  z-index: 2;
+  transition: background 0.2s, color 0.2s;
+}
+#product1 .pro .cart:hover {
+  background: #088178;
+  color: #fff;
+}
+/* Loại bỏ hoàn toàn position absolute cho icon giỏ hàng */
+#product1 .pro a,
+#product1 .pro .cart {
+  position: static !important;
 }
 
 #product1 .pro-container {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */ 
     flex-wrap: wrap;
     padding-top: 20px;
 }
@@ -286,7 +341,24 @@ body {
     border: 1px solid #cce7d0;
     position: absolute;
     bottom: 20px;
-    right: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    z-index: 2;
+}
+#product1 .pro a {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+#product1 .pro {
+  position: relative;
 }
 
 #banner {
@@ -874,6 +946,172 @@ footer .copyright {
     width: 100%;
     text-align: center;
 }
+
+/* Sidebar category - cố định chiều rộng, không scale khi click */
+.sidebar {
+  width: 210px;
+  min-width: 210px;
+  max-width: 210px;
+  min-height: 600px;
+  height: 100%;
+  padding: 0 0 0 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  margin: 0 32px 0 0;
+  display: block;
+  flex-direction: unset;
+  align-items: unset;
+}
+
+.category-bar {
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+.category-list-horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+.category-list-horizontal .category-item {
+  font-size: 20px;
+  color: #333;
+  font-weight: 500;
+  padding: 12px 28px;
+  border-radius: 8px 8px 0 0;
+  background: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, font-weight 0.2s;
+  white-space: nowrap;
+  border: none;
+  margin: 0;
+  text-align: center;
+}
+.category-list-horizontal .category-item.selected {
+  background: #f37021;
+  color: #fff;
+  font-weight: bold;
+}
+.category-list-horizontal .category-item:hover {
+  background: #f2f2f2;
+  color: #222;
+  font-weight: bold;
+}
+.main-content {
+  flex: 1;
+  padding: 0 0 20px 0;
+  display: block;
+}
+
+.pro-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+}
+
+.pro {
+  width: 300px;
+  max-width: 100%;
+  margin: 0;
+}
+
+.topbar {
+  width: 100%;
+  background: #232323;
+  color: #fff;
+  font-size: 15px;
+  padding: 0 0 0 0;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+}
+.topbar-list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0 32px 0 0;
+  list-style: none;
+  height: 32px;
+}
+.topbar-list li {
+  display: flex;
+  align-items: center;
+  margin-left: 28px;
+  color: #fff;
+  font-size: 15px;
+}
+.topbar-list li i {
+  margin-right: 6px;
+  color: #fff;
+}
+.topbar-list li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+}
+.topbar-list li a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
+  .topbar-list {
+    padding: 0 8px 0 0;
+  }
+  .topbar-list li {
+    margin-left: 12px;
+    font-size: 13px;
+  }
+}
+
+
+/* Modal đăng nhập/đăng ký với 2 tab, tông cam */
+.modal {
+  display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+  overflow: auto; background: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background: #fff; margin: 5% auto; padding: 30px 40px; border-radius: 8px; width: 350px; position: relative;
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+}
+.close {
+  position: absolute; right: 16px; top: 8px; font-size: 28px; cursor: pointer;
+}
+.tab { display: flex; margin-bottom: 20px; }
+.tab button {
+  flex: 1; padding: 10px; border: none; background: #eee; cursor: pointer; font-weight: bold; font-size: 16px;
+  border-radius: 8px 8px 0 0;
+  color: #f37021;
+  transition: background 0.2s, color 0.2s;
+}
+.tab button.active { background: #f37021; color: #fff; }
+.tabcontent { display: none; }
+.tabcontent form { display: flex; flex-direction: column; }
+.tabcontent label { margin: 8px 0 4px; font-weight: 500; }
+.tabcontent input {
+  padding: 8px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px;
+}
+.tabcontent button[type=submit] {
+  background: #f37021; color: #fff; border: none; padding: 10px; border-radius: 4px; font-weight: bold; cursor: pointer;
+  margin-top: 8px;
+}
+@media (max-width: 500px) {
+  .modal-content { width: 95vw; padding: 18px 6vw; }
+}
+
 
 
 
