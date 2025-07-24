@@ -1028,52 +1028,47 @@ footer .copyright {
 
 .topbar {
   width: 100%;
-  background: #232323;
+  background: #222;
   color: #fff;
-  font-size: 15px;
   padding: 0 0 0 0;
-  min-height: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
-  position: relative;
-  z-index: 100;
+  justify-content: flex-end;
 }
 .topbar-list {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  margin: 0;
-  padding: 0 32px 0 0;
   list-style: none;
-  height: 32px;
+  margin: 0;
+  padding: 0 30px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .topbar-list li {
-  display: flex;
-  align-items: center;
-  margin-left: 28px;
-  color: #fff;
-  font-size: 15px;
+  margin-left: 18px;
 }
-.topbar-list li i {
-  margin-right: 6px;
-  color: #fff;
-}
-.topbar-list li a {
+#login-btn {
   color: #fff;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
 }
-.topbar-list li a:hover {
-  text-decoration: underline;
+#login-btn i {
+  margin-right: 6px;
+  font-size: 18px;
 }
-@media (max-width: 900px) {
+#login-btn:hover {
+  color: #f37021;
+}
+@media (max-width: 600px) {
   .topbar-list {
-    padding: 0 8px 0 0;
+    padding-right: 10px;
   }
-  .topbar-list li {
-    margin-left: 12px;
-    font-size: 13px;
+  #login-btn {
+    font-size: 14px;
   }
 }
 
@@ -1084,14 +1079,14 @@ footer .copyright {
   #navbar { position: fixed; top: 0; right: -100%; width: 220px; height: 100vh; background: #fff; flex-direction: column; transition: right 0.3s; z-index: 1001; }
   #navbar.open { right: 0; }
 }
-
 .back-to-top {
-  position: fixed; right: 24px; bottom: 32px; z-index: 999;
-  background: #088178; color: #fff; border: none; border-radius: 50%;
-  width: 44px; height: 44px; font-size: 22px; opacity: 0; pointer-events: none;
+  position: fixed; bottom: 30px; right: 30px; z-index: 999;
+  background: #f37021; color: #fff; border: none; border-radius: 50%;
+  width: 40px; height: 40px; font-size: 22px; opacity: 0; pointer-events: none;
   transition: opacity 0.3s;
 }
 .back-to-top.show { opacity: 1; pointer-events: auto; }
+html { scroll-behavior: smooth; }
 
 
 /* Modal đăng nhập/đăng ký với 2 tab, tông cam */
@@ -1126,6 +1121,65 @@ footer .copyright {
 }
 @media (max-width: 500px) {
   .modal-content { width: 95vw; padding: 18px 6vw; }
+}
+
+.cart-link {
+  position: relative;
+}
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #f37021;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+  z-index: 10;
+}
+
+
+
+
+
+
+
+
+
+#auth-container {
+  width: 350px;
+  margin: 60px auto;
+  padding: 30px 25px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+#auth-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+#auth-form button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#auth-form button:hover {
+  background: #0056b3;
+}
+#toggle-form {
+  margin-top: 10px;
+  text-align: center;
 }
 
 

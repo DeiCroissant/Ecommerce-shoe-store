@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #f4f6fa; }
+    .admin-header { background: #222; color: #fff; padding: 18px 32px; font-size: 22px; font-weight: bold; letter-spacing: 1px; }
+    .admin-layout { display: flex; min-height: 100vh; }
+    .admin-sidebar { width: 220px; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,0.04); padding: 32px 0; }
+    .admin-sidebar ul { list-style: none; padding: 0; }
+    .admin-sidebar li { margin: 18px 0; }
+    .admin-sidebar a { color: #222; text-decoration: none; font-weight: 500; padding: 10px 32px; display: block; border-left: 4px solid transparent; transition: 0.2s; }
+    .admin-sidebar a.active, .admin-sidebar a:hover { background: #f0f0f0; border-left: 4px solid #f37021; color: #f37021; }
+    .admin-content { flex: 1; padding: 40px; }
+    .admin-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 32px; margin-bottom: 32px; }
+    .admin-title { font-size: 20px; font-weight: bold; margin-bottom: 18px; }
+    .admin-table { width: 100%; border-collapse: collapse; }
+    .admin-table th, .admin-table td { padding: 10px 14px; border-bottom: 1px solid #eee; text-align: left; }
+    .admin-table th { background: #f8f8f8; }
+    .admin-btn { background: #f37021; color: #fff; border: none; border-radius: 4px; padding: 6px 14px; cursor: pointer; margin-right: 6px; font-size: 14px; }
+    .admin-btn.danger { background: #e74c3c; }
+    @media (max-width: 900px) {
+      .admin-layout { flex-direction: column; }
+      .admin-sidebar { width: 100%; box-shadow: none; padding: 12px 0; }
+      .admin-content { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-header">Admin Dashboard</div>
+  <div class="admin-layout">
+    <nav class="admin-sidebar">
+      <ul>
+        <li><a href="#" class="active" id="tab-products">Quản lý sản phẩm</a></li>
+        <li><a href="#" id="tab-orders">Quản lý đơn hàng</a></li>
+        <li><a href="#" id="tab-users">Quản lý người dùng</a></li>
+        <li><a href="#" id="admin-logout">Đăng xuất</a></li>
+      </ul>
+    </nav>
+    <main class="admin-content">
+      <div class="admin-card" id="products-section">
+        <div class="admin-title">Sản phẩm mới nhất</div>
+        <table class="admin-table">
+          <tr><th>Tên sản phẩm</th><th>Giá</th><th>Trạng thái</th></tr>
+          <tr><td>Basas Bumper Gum EXT NE</td><td>$19.99</td><td>Còn hàng</td></tr>
+          <tr><td>Vintas Denim - High Top</td><td>$199.99</td><td>Hết hàng</td></tr>
+          <tr><td>Pattas Polka Dots</td><td>$199.99</td><td>Còn hàng</td></tr>
+        </table>
+      </div>
+      <div class="admin-card" id="orders-section" style="display:none;">
+        <div class="admin-title">Quản lý đơn hàng</div>
+        <table class="admin-table" id="orders-table">
+          <thead>
+            <tr><th>Mã đơn</th><th>Khách hàng</th><th>Tổng tiền</th><th>Trạng thái</th><th>Hành động</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="admin-card" id="users-section" style="display:none;">
+        <div class="admin-title">Quản lý người dùng</div>
+        <table class="admin-table" id="users-table">
+          <thead>
+            <tr><th>Email</th><th>Loại tài khoản</th><th>Hành động</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <script>
+    // Bảo vệ trang admin: chỉ cho phép admin truy cập
+    if (localStorage.getItem('isAdmin') !== 'true') {
+      window.location.href = 'index.html';
+    }
+    // Đăng xuất admin
+    document.getElementById('admin-logout').onclick = function(e) {
+      e.preventDefault();
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('isAdmin');
+      window.location.href = 'index.html';
+    };
+
+    // Tab logic
+    const tabProducts = document.getElementById('tab-products');
+    const tabOrders = document.getElementById('tab-orders');
+    const tabUsers = document.getElementById('tab-users');
+    const productsSection = document.getElementById('products-section');
+    const ordersSection = document.getElementById('orders-section');
+    const usersSection = document.getElementById('users-section');
+    tabProducts.onclick = function(e) {
+      e.preventDefault();
+      tabProducts.classList.add('active');
+      tabOrders.classList.remove('active');
+      tabUsers.classList.remove('active');
+      productsSection.style.display = '';
+      ordersSection.style.display = 'none';
+      usersSection.style.display = 'none';
+    };
+    tabOrders.onclick = function(e) {
+      e.preventDefault();
+      tabProducts.classList.remove('active');
+      tabOrders.classList.add('active');
+      tabUsers.classList.remove('active');
+      productsSection.style.display = 'none';
+      ordersSection.style.display = '';
+      usersSection.style.display = 'none';
+    };
+    tabUsers.onclick = function(e) {
+      e.preventDefault();
+      tabProducts.classList.remove('active');
+      tabOrders.classList.remove('active');
+      tabUsers.classList.add('active');
+      productsSection.style.display = 'none';
+      ordersSection.style.display = 'none';
+      usersSection.style.display = '';
+    };
+
+    // Dữ liệu mẫu đơn hàng và người dùng (demo, lưu localStorage)
+    const defaultOrders = [
+      {id: '1001', customer: 'Nguyễn Văn A', total: 199.99, status: 'Đã giao'},
+      {id: '1002', customer: 'Trần Thị B', total: 19.99, status: 'Đang xử lý'},
+      {id: '1003', customer: 'Lê Văn C', total: 299.99, status: 'Đã hủy'}
+    ];
+    const defaultUsers = [
+      {email: 'admin@example.com', type: 'Admin'},
+      {email: 'user1@example.com', type: 'User'},
+      {email: 'user2@example.com', type: 'User'}
+    ];
+    function getOrders() {
+      return JSON.parse(localStorage.getItem('adminOrders') || 'null') || defaultOrders;
+    }
+    function setOrders(orders) {
+      localStorage.setItem('adminOrders', JSON.stringify(orders));
+    }
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('adminUsers') || 'null') || defaultUsers;
+    }
+    function setUsers(users) {
+      localStorage.setItem('adminUsers', JSON.stringify(users));
+    }
+    // Render orders
+    function renderOrders() {
+      const orders = getOrders();
+      const tbody = document.querySelector('#orders-table tbody');
+      tbody.innerHTML = '';
+      orders.forEach((order, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${order.id}</td>
+          <td>${order.customer}</td>
+          <td>$${order.total.toFixed(2)}</td>
+          <td>
+            <select class="order-status" data-idx="${idx}">
+              <option${order.status==='Đang xử lý'?' selected':''}>Đang xử lý</option>
+              <option${order.status==='Đã giao'?' selected':''}>Đã giao</option>
+              <option${order.status==='Đã hủy'?' selected':''}>Đã hủy</option>
+            </select>
+          </td>
+          <td><button class="admin-btn danger" data-idx="${idx}">Xóa</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      // Sự kiện đổi trạng thái
+      tbody.querySelectorAll('.order-status').forEach(sel => {
+        sel.onchange = function() {
+          const orders = getOrders();
+          orders[this.dataset.idx].status = this.value;
+          setOrders(orders);
+          renderOrders();
+        };
+      });
+      // Sự kiện xóa
+      tbody.querySelectorAll('.admin-btn.danger').forEach(btn => {
+        btn.onclick = function() {
+          let orders = getOrders();
+          orders.splice(this.dataset.idx, 1);
+          setOrders(orders);
+          renderOrders();
+        };
+      });
+    }
+    // Render users
+    function renderUsers() {
+      const users = getUsers();
+      const tbody = document.querySelector('#users-table tbody');
+      tbody.innerHTML = '';
+      users.forEach((user, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${user.email}</td>
+          <td>${user.type}</td>
+          <td>${user.type !== 'Admin' ? `<button class="admin-btn danger" data-idx="${idx}">Xóa</button>` : ''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      // Sự kiện xóa user
+      tbody.querySelectorAll('.admin-btn.danger').forEach(btn => {
+        btn.onclick = function() {
+          let users = getUsers();
+          users.splice(this.dataset.idx, 1);
+          setUsers(users);
+          renderUsers();
+        };
+      });
+    }
+    // Khởi tạo
+    renderOrders();
+    renderUsers();
+  </script>
+</body>
+</html> 

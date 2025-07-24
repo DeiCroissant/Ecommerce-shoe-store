@@ -12,7 +12,7 @@
     <!-- Topbar giống Ananas -->
     <div class="topbar">
       <ul class="topbar-list">
-        <li><a href="#" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
+        <li><a href="auth.html" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
       </ul>
     </div>
 
@@ -24,8 +24,7 @@
                 <li><a class="active" href="shop.html">Shop</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
             </ul>
         </div>
     </section>
@@ -70,7 +69,7 @@
                     </div>
                     <div class="pro-bottom">
                         <h4>$19.99</h4>
-                        <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
+                        <a href="#" class="add-to-cart-btn" data-name="Basas Bumper Gum EXT NE - High Top - Black/Gum" data-price="19.99" data-image="./products/Pro_AV00099_1.jpg"><i class="ri-shopping-cart-line cart"></i></a>
                     </div>
                 </div>
                 <div class="pro" onclick="window.location.href='sproduct2.html';">
@@ -447,62 +446,7 @@
       </div>
     </div>
     <script src="script.js"></script>
-    <script>
-      // Lọc sản phẩm theo tag và làm nổi bật mục đang chọn
-      document.querySelectorAll('.category-item').forEach(function(item) {
-        item.addEventListener('click', function() {
-          var tag = this.getAttribute('data-tag');
-          document.querySelectorAll('.category-item').forEach(function(i){
-            i.classList.remove('selected');
-          });
-          this.classList.add('selected');
-          document.querySelectorAll('.pro').forEach(function(pro) {
-            var span = pro.querySelector('.desc span');
-            if (tag === 'all' || (span && span.textContent.trim() === tag)) {
-              pro.style.display = '';
-            } else {
-              pro.style.display = 'none';
-            }
-          });
-        });
-      });
-      // Đặt mặc định là 'Tất cả' được chọn
-      var defaultCat = document.querySelector('.category-item[data-tag="all"]');
-      if(defaultCat) defaultCat.classList.add('selected');
-    </script>
-    <script>
-      // Hiện modal
-      var loginBtn = document.getElementById('login-btn');
-      if (loginBtn) loginBtn.onclick = function(e) {
-        e.preventDefault();
-        document.getElementById('login-modal').style.display = 'block';
-      };
-      // Đóng modal
-      var closeLoginModal = document.getElementById('close-login-modal');
-      if (closeLoginModal) closeLoginModal.onclick = function() {
-        document.getElementById('login-modal').style.display = 'none';
-      };
-      window.onclick = function(event) {
-        var modal = document.getElementById('login-modal');
-        if (event.target == modal) {
-          modal.style.display = 'none';
-        }
-      };
-      // Chuyển tab
-      function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName('tabcontent');
-        for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = 'none';
-        tablinks = document.getElementsByClassName('tablinks');
-        for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove('active');
-        document.getElementById(tabName).style.display = 'block';
-        evt.currentTarget.classList.add('active');
-      }
-      // Ngăn submit reload trang
-      var loginForm = document.getElementById('login-form');
-      if (loginForm) loginForm.onsubmit = function(e) { e.preventDefault(); alert('Đăng nhập thành công (demo)!'); document.getElementById('login-modal').style.display = 'none'; };
-      var registerForm = document.getElementById('register-form');
-      if (registerForm) registerForm.onsubmit = function(e) { e.preventDefault(); alert('Đăng ký thành công (demo)!'); document.getElementById('login-modal').style.display = 'none'; };
-    </script>
+    <script src="common.js"></script>
+    <button id="back-to-top" class="back-to-top">↑</button>
 </body>
 </html>

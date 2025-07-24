@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+    <div class="topbar">
+      <ul class="topbar-list">
+        <li><a href="#" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
+      </ul>
+    </div>
 
     <section id="header">
         <a href="#"><img src="logo.png"  class="logo" alt=""></a>
@@ -18,7 +23,7 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
             </ul>
         </div>
     </section>
@@ -57,8 +62,8 @@
                 <option>43</option>
                 <option>44</option>
             </select>
-            <input type="number" value="1">
-            <button class="normal">Add To Cart</button>
+            <input type="number" value="1" id="product-qty">
+            <button class="normal add-to-cart-btn" data-name="Urbas Love+ 24 - Oyster White" data-price="199.99" data-image="./products/Pro_ALP2402_1-1.jpg">Add To Cart</button>
             <h4>Product Details</h4>
             <span><img src="./products/Ananas_SizeChart.jpg" alt=""></span>
         </div>
@@ -215,6 +220,37 @@
             MainImg.src = smallimg[3].src;
         }
     </script>
+    <!-- Modal đăng nhập/đăng ký -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="close-login-modal">&times;</span>
+        <div class="tab">
+          <button class="tablinks active" onclick="openTab(event, 'login')">Đăng nhập</button>
+          <button class="tablinks" onclick="openTab(event, 'register')">Đăng ký</button>
+        </div>
+        <div id="login" class="tabcontent" style="display:block;">
+          <form id="login-form">
+            <label>Email:</label>
+            <input type="email" required>
+            <label>Mật khẩu:</label>
+            <input type="password" required>
+            <button type="submit">Đăng nhập</button>
+          </form>
+        </div>
+        <div id="register" class="tabcontent">
+          <form id="register-form">
+            <label>Email:</label>
+            <input type="email" required>
+            <label>Mật khẩu:</label>
+            <input type="password" required>
+            <label>Nhập lại mật khẩu:</label>
+            <input type="password" required>
+            <button type="submit">Đăng ký</button>
+          </form>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
+    <button id="back-to-top" class="back-to-top">↑</button>
 </body>
 </html>

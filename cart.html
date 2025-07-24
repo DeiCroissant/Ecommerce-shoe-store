@@ -11,7 +11,7 @@
     <!-- Topbar giống Ananas -->
     <div class="topbar">
       <ul class="topbar-list">
-        <li><a href="#" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
+        <li><a href="auth.html" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
       </ul>
     </div>
 
@@ -23,7 +23,6 @@
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
                 <li><a class="active" href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
             </ul>
         </div>
@@ -158,70 +157,8 @@
             <p>&copy; 2022 E-commerce Shoe Store. All rights reserved.</p>
         </div>
     </footer>
-    <!-- Modal đăng nhập/đăng ký -->
-<div id="login-modal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="close-login-modal">&times;</span>
-    <div class="tab">
-      <button class="tablinks active" onclick="openTab(event, 'login')">Đăng nhập</button>
-      <button class="tablinks" onclick="openTab(event, 'register')">Đăng ký</button>
-    </div>
-    <div id="login" class="tabcontent" style="display:block;">
-      <form id="login-form">
-        <label>Email:</label>
-        <input type="email" required>
-        <label>Mật khẩu:</label>
-        <input type="password" required>
-        <button type="submit">Đăng nhập</button>
-      </form>
-    </div>
-    <div id="register" class="tabcontent">
-      <form id="register-form">
-        <label>Email:</label>
-        <input type="email" required>
-        <label>Mật khẩu:</label>
-        <input type="password" required>
-        <label>Nhập lại mật khẩu:</label>
-        <input type="password" required>
-        <button type="submit">Đăng ký</button>
-      </form>
-    </div>
-  </div>
-</div>
-    <script src="script.js"></script>
-    <script>
-// Hiện modal
-var loginBtn = document.getElementById('login-btn');
-if (loginBtn) loginBtn.onclick = function(e) {
-  e.preventDefault();
-  document.getElementById('login-modal').style.display = 'block';
-};
-// Đóng modal
-var closeLoginModal = document.getElementById('close-login-modal');
-if (closeLoginModal) closeLoginModal.onclick = function() {
-  document.getElementById('login-modal').style.display = 'none';
-};
-window.onclick = function(event) {
-  var modal = document.getElementById('login-modal');
-  if (event.target == modal) {
-    modal.style.display = 'none';
-  }
-};
-// Chuyển tab
-function openTab(evt, tabName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName('tabcontent');
-  for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = 'none';
-  tablinks = document.getElementsByClassName('tablinks');
-  for (i = 0; i < tablinks.length; i++) tablinks[i].classList.remove('active');
-  document.getElementById(tabName).style.display = 'block';
-  evt.currentTarget.classList.add('active');
-}
-// Ngăn submit reload trang
-var loginForm = document.getElementById('login-form');
-if (loginForm) loginForm.onsubmit = function(e) { e.preventDefault(); alert('Đăng nhập thành công (demo)!'); document.getElementById('login-modal').style.display = 'none'; };
-var registerForm = document.getElementById('register-form');
-if (registerForm) registerForm.onsubmit = function(e) { e.preventDefault(); alert('Đăng ký thành công (demo)!'); document.getElementById('login-modal').style.display = 'none'; };
-</script>
+    <!-- XÓA toàn bộ code modal đăng nhập/đăng ký cũ và JS liên quan -->
+<script src="script.js"></script>
+<script src="common.js"></script>
 </body>
 </html>
