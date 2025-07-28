@@ -10,11 +10,10 @@
 </head>
 <body>
     <!-- Topbar giống Ananas -->
-    <div class="topbar">
-      <ul class="topbar-list">
-        <li><a href="auth.html" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
-      </ul>
-    </div>
+          <div class="topbar">
+        <ul class="topbar-list">
+        </ul>
+      </div>
 
     <section id="header">
         <a href="#"><img src="logo.png"  class="logo" alt=""></a>
@@ -29,8 +28,47 @@
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="admin.html">Admin Dashboard</a></li>
                 <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
+                <li id="auth-links">
+                    <a href="login.html" id="login-link"><i class="fas fa-user"></i></a>
+                </li>
+                <li id="user-info" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" class="user-dropdown-toggle" id="user-email">
+                            <i class="fas fa-user"></i>
+                            <span id="user-email-text">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown-menu">
+                            <div class="user-info-header">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="dropdown-user-email">User</span>
+                            </div>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="user.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                            <a href="admin.html" class="dropdown-item admin-link" style="display: none;">
+                                <i class="fas fa-crown"></i>
+                                Admin Panel
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-edit"></i>
+                                Hồ sơ
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                Đơn hàng
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <button class="dropdown-item logout-btn" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </section>
@@ -73,135 +111,8 @@
     <section id="product1" class="section-p1">
         <h2>Featured Products</h2>
         <p>Summer Collection New Modern Design</p>
-        <div class="pro-container">
-            <div class="pro" onclick="window.location.href='sproduct.html'">
-                <img src="./products/Pro_AV00099_1.jpg" alt="Basas Bumper Gum EXT NE - High Top - Black/Gum">
-                <div class="desc">
-                    <span>Basas</span>
-                    <h5>Basas Bumper Gum EXT NE - High Top - Black/Gum</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="sproduct.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro" onclick="window.location.href='sproduct2.html'">
-                <img src="./products/Pro_AV00212_1.jpg" alt="Vintas Denim - High Top - Night Sky">
-                <div class="desc">
-                    <span>Vintas</span>
-                    <h5>Vintas Denim - High Top - Night Sky</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$199.99</h4>
-                </div>
-                <a href="sproduct2.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro" onclick="window.location.href='sproduct3.html'">
-                <img src="./products/pro_A61113_1.jpg" alt="Ananas X Doraemon 50 Years Pattas - White/Corydalis 50th">
-                <div class="desc">
-                    <span>Ananas</span>
-                    <h5>Ananas X Doraemon 50 Years Pattas - White/Corydalis 50th</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$199.99</h4>
-                </div>
-                <a href="sproduct3.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro" onclick="window.location.href='sproduct4.html'">
-                <img src="./products/pro_AV00115_1.jpg" alt="Basas Bumper Gum EXT NE - High Top - Black/Gum">
-                <div class="desc">
-                    <span>Basas</span>
-                    <h5>Basas Bumper Gum EXT NE - High Top - Black/Gum</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$199.99</h4>
-                </div>
-                <a href="sproduct4.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro" onclick="window.location.href='sproduct5.html'">
-                <img src="./products/pro_AV00158_1.jpg" alt="Pattas Polka Dots - High Top - Offwhite">
-                <div class="desc">
-                    <span>Pattas</span>
-                    <h5>Pattas Polka Dots - High Top - Offwhite</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$199.99</h4>
-                </div>
-                <a href="sproduct5.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro" onclick="window.location.href='sproduct6.html'">
-                <img src="./products/Pro_AV00191_1.jpg" alt="Urbas SC - High Top - Dusty Blue">
-                <div class="desc">
-                    <span>Urbas</span>
-                    <h5>Urbas SC - High Top - Dusty Blue</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="sproduct6.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro" onclick="window.location.href='sproduct4.html'">
-                <img src="./products/f7.jpg" alt="Cartoon Astronaut T-Shirts">
-                <div class="desc">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="sproduct4.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro" onclick="window.location.href='sproduct4.html'">
-                <img src="./products/f8.jpg" alt="Cartoon Astronaut T-Shirts">
-                <div class="desc">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="sproduct4.html"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
+        <div class="pro-container" id="featured-products-container">
+            <!-- Sản phẩm sẽ được render tự động bằng JS -->
         </div>
     </section>
 
@@ -209,141 +120,6 @@
         <h4>Repair Services</h4>
         <h2>Up to <span>70% Off</span> - All t-shirts % Accessories</h2>
         <button class="normal">Explore More</button>
-    </section>
-
-    <section id="product1" class="section-p1">
-        <h2>New Arrivals</h2>
-        <p>Summer Collection New Modern Design</p>
-        <div class="pro-container">
-            <div class="pro">
-                <img src="./products/n1.jpg" alt="">
-                <div class="desc">
-                    <span>Nike</span>
-                    <h5>Nike Air Max 2023</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$129.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro">
-                <img src="./products/n2.jpg" alt="">
-                <div class="desc">
-                    <span>Puma</span>
-                    <h5>Puma Classic Suede</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$89.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro">
-                <img src="./products/n3.jpg" alt="">
-                <div class="desc">
-                    <span>Zara</span>
-                    <h5>Zara Linen Shirt</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$39.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro">
-                <img src="./products/n4.jpg" alt="">
-                <div class="desc">
-                    <span>Uniqlo</span>
-                    <h5>Uniqlo Casual Pants</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$29.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro">
-                <img src="./products/n5.jpg" alt="">
-                <div class="desc">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro">
-                <img src="./products/n6.jpg" alt="">
-                <div class="desc">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro">
-                <img src="./products/n7.jpg" alt="">
-                <div class="desc">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-            <div class="pro">
-                <img src="./products/n8.jpg" alt="">
-                <div class="desc">
-                    <span>adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-            </div>
-        </div>
     </section>
 
     <section id="sm-banner" class="section-p1">

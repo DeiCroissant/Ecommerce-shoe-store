@@ -3,29 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shoe Store</title>
+    <title>Quản lý đơn hàng - Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <!-- Topbar giống Ananas -->
-          <div class="topbar">
-        <ul class="topbar-list">
-        </ul>
-      </div>
-
+    <!-- Header -->
     <section id="header">
-        <a href="#"><img src="logo.png"  class="logo" alt=""></a>
+        <a href="#"><img src="logo.png" class="logo" alt=""></a>
         <div>
             <ul id="navbar">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a class="active" href="about.html">About</a></li>
-                <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
-                <li id="auth-links">
-                    <a href="login.html" id="login-link"><i class="fas fa-user"></i></a>
-                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
                 <li id="user-info" style="display: none;">
                     <div class="user-dropdown">
                         <a href="#" class="user-dropdown-toggle" id="user-email">
@@ -67,73 +59,37 @@
         </div>
     </section>
 
-
     <section id="page-header" class="about-header">
-        
-        <h2>#KnowUs</h2>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, doloremque.</p>
-
+        <h2>Quản lý đơn hàng</h2>
+        <p>Xem và quản lý tất cả đơn hàng từ khách hàng</p>
     </section>
 
-    <section id="about-head" class="section-p1">
-        <img src="./about/a6.jpg" alt="">
-        <div>
-            <h2>Who We Are?</h2>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque magnam sed deleniti numquam saepe! Ipsam eum voluptatum debitis est, incidunt aperiam laborum, tempore, totam iste temporibus a. Libero, sit maiores?</p>
+    <section id="order-management" class="section-p1">
+        <div class="order-filters">
+            <select id="status-filter">
+                <option value="">Tất cả trạng thái</option>
+                <option value="pending">Chờ xử lý</option>
+                <option value="processing">Đang xử lý</option>
+                <option value="shipped">Đã gửi hàng</option>
+                <option value="delivered">Đã giao hàng</option>
+                <option value="cancelled">Đã hủy</option>
+            </select>
+            <button class="normal" onclick="refreshOrders()">Làm mới</button>
+        </div>
 
-            <abbr title="">Create Stunning images with as much or as little control as you like thanks to a choice of Basic and Creative modes</abbr>
-
-            <br><br>
-
-            <marquee  loop="-1" scrollamount="5" width="100%">Create Stunning images with as much or as little control as you like thanks to a choice of Basic and Creative modes</marquee>
-        </div>
-    </section>
-    
-    <section id="about-app" class="section-p1">
-         <h1>Download Our <a href="#">App</a></h1>
-         <div class="video">
-            <video autoplay muted loop src="./about/1.mp4"></video>
-         </div>
-    </section>
-
-    <section id="feature" class="section-p1">
-        <div class="fe-box">
-            <img src="./features/f1.png" alt="">
-            <h6>Free Shipping</h6>
-        </div>
-         <div class="fe-box">
-            <img src="./features/f2.png" alt="">
-            <h6>Online Order</h6>
-        </div>
-         <div class="fe-box">
-            <img src="./features/f3.png" alt="">
-            <h6>Save Money</h6>
-        </div>
-         <div class="fe-box">
-            <img src="./features/f4.png" alt="">
-            <h6>24/7 Support</h6>
-        </div>
-         <div class="fe-box">
-            <img src="./features/f5.png" alt="">
-            <h6>Free Shipping</h6>
-        </div>
-        <div class="fe-box">
-            <img src="./features/f6.png" alt="">
-            <h6>Free Shipping</h6>
+        <div id="orders-container">
+            <div class="loading">Đang tải đơn hàng...</div>
         </div>
     </section>
 
-    <section id="newsletter" class="section-p1 section-m1">
-        <div class="newstext">
-            <h4>Sign Up for Our newsletter</h4>
-            <P>Get E-mail updates about our latest shop and <span>special offers.</span></P>
+    <!-- Modal xem chi tiết đơn hàng -->
+    <div id="order-detail-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Chi tiết đơn hàng</h2>
+            <div id="order-detail-content"></div>
         </div>
-        <div class="form">
-            <input type="text" placeholder="Your email address">
-            <button class="normal">Sign Up</button>
-        </div>
-    </section>
+    </div>
 
     <footer class="section-p1">
         <div class="col">
@@ -151,7 +107,6 @@
                     <i class="fab fa-pinterest-p"></i>
                     <i class="fab fa-youtube"></i>
                 </div>
-                
             </div>
         </div>
 
@@ -186,9 +141,9 @@
             <p>&copy; 2022 E-commerce Shoe Store. All rights reserved.</p>
         </div>
     </footer>
-    <!-- XÓA toàn bộ code modal đăng nhập/đăng ký cũ và JS liên quan -->
-<script src="script.js"></script>
-<script src="common.js"></script>
-<button id="back-to-top" class="back-to-top">↑</button>
+
+    <script src="script.js"></script>
+    <script src="common.js"></script>
+    <script src="order_management.js"></script>
 </body>
-</html>
+</html> 

@@ -10,11 +10,10 @@
 </head>
 <body>
     <!-- Topbar giống Ananas -->
-    <div class="topbar">
-      <ul class="topbar-list">
-        <li><a href="auth.html" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
-      </ul>
-    </div>
+          <div class="topbar">
+        <ul class="topbar-list">
+        </ul>
+      </div>
 
     <section id="header">
         <a href="#"><img src="logo.png"  class="logo" alt=""></a>
@@ -25,6 +24,46 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
+                <li id="auth-links">
+                    <a href="login.html" id="login-link"><i class="fas fa-user"></i></a>
+                </li>
+                <li id="user-info" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" class="user-dropdown-toggle" id="user-email">
+                            <i class="fas fa-user"></i>
+                            <span id="user-email-text">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown-menu">
+                            <div class="user-info-header">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="dropdown-user-email">User</span>
+                            </div>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="user.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                            <a href="admin.html" class="dropdown-item admin-link" style="display: none;">
+                                <i class="fas fa-crown"></i>
+                                Admin Panel
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-edit"></i>
+                                Hồ sơ
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                Đơn hàng
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <button class="dropdown-item logout-btn" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </section>
@@ -41,143 +80,18 @@
         
     <section id="product1" class="section-p1">
       <div class="category-bar">
-        <ul class="category-list-horizontal">
-          <li class="category-item" data-tag="all">Tất cả</li>
-          <li class="category-item" data-tag="Basas">Basas</li>
-          <li class="category-item" data-tag="Vintas">Vintas</li>
-          <li class="category-item" data-tag="Ananas">Ananas</li>
-          <li class="category-item" data-tag="Pattas">Pattas</li>
-          <li class="category-item" data-tag="Urbas">Urbas</li>
-          <li class="category-item" data-tag="adidas">adidas</li>
-          <li class="category-item" data-tag="Track">Track</li>
+        <ul class="category-list-horizontal" id="category-list">
+          <li class="category-item active" data-tag="all">Tất cả</li>
+          <!-- Categories will be loaded here -->
         </ul>
       </div>
       <div class="main-content">
-        <div class="pro-container">
-                <div class="pro" onclick="window.location.href='sproduct.html';">
-                    <img src="./products/Pro_AV00099_1.jpg" alt="Basas Bumper Gum EXT NE - High Top - Black/Gum">
-                    <div class="desc">
-                        <span>Basas</span>
-                        <h5>Basas Bumper Gum EXT NE - High Top - Black/Gum</h5>
-                        <div class="star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="pro-bottom">
-                        <h4>$19.99</h4>
-                        <a href="#" class="add-to-cart-btn" data-name="Basas Bumper Gum EXT NE - High Top - Black/Gum" data-price="19.99" data-image="./products/Pro_AV00099_1.jpg"><i class="ri-shopping-cart-line cart"></i></a>
-                    </div>
-                </div>
-                <div class="pro" onclick="window.location.href='sproduct2.html';">
-                    <img src="./products/Pro_AV00212_1.jpg" alt="Vintas Denim - High Top - Night Sky">
-                    <div class="desc">
-                        <span>Vintas</span>
-                        <h5>Vintas Denim - High Top - Night Sky</h5>
-                        <div class="star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="pro-bottom">
-                        <h4>$199.99</h4>
-                        <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-                    </div>
-                </div>
-                <div class="pro" onclick="window.location.href='sproduct3.html';">
-                    <img src="./products/pro_A61113_1.jpg" alt="Ananas X Doraemon 50 Years Pattas - White/Corydalis 50th">
-                    <div class="desc">
-                        <span>Ananas</span>
-                        <h5>Ananas X Doraemon 50 Years Pattas - White/Corydalis 50th</h5>
-                        <div class="star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="pro-bottom">
-                        <h4>$199.99</h4>
-                        <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-                    </div>
-                </div>
-                <div class="pro" onclick="window.location.href='sproduct4.html';">
-                    <img src="./products/pro_AV00115_1.jpg" alt="Basas Bumper Gum EXT NE - High Top - Black/Gum">
-                    <div class="desc">
-                        <span>Basas</span>
-                        <h5>Basas Bumper Gum EXT NE - High Top - Black/Gum</h5>
-                        <div class="star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="pro-bottom">
-                        <h4>$199.99</h4>
-                        <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-                    </div>
-                </div>
-                <div class="pro" onclick="window.location.href='sproduct5.html';">
-                    <img src="./products/pro_AV00158_1.jpg" alt="Pattas Polka Dots - High Top - Offwhite">
-                    <div class="desc">
-                        <span>Pattas</span>
-                        <h5>Pattas Polka Dots - High Top - Offwhite</h5>
-                        <div class="star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="pro-bottom">
-                        <h4>$199.99</h4>
-                        <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-                    </div>
-                </div>
-                <div class="pro" onclick="window.location.href='sproduct6.html';">
-                    <img src="./products/Pro_AV00191_1.jpg" alt="Urbas SC - High Top - Dusty Blue">
-                    <div class="desc">
-                        <span>Urbas</span>
-                        <h5>Urbas SC - High Top - Dusty Blue</h5>
-                        <div class="star">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="pro-bottom">
-                        <h4>$19.99</h4>
-                        <a href="#"><i class="ri-shopping-cart-line cart"></i></a>
-                    </div>
-                </div>
-                 <div class="pro" onclick="window.location.href='sproduct7.html';">
-                <img src="./products/Pro_A6T016_1.jpg" alt="">
-                <div class="desc">
-                    <span>Track 6 Jazico - Low Top</span>
-                    <h5>Track 6 Jazico - Low Top - Royal White</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$19.99</h4>
-                </div>
-                <a href="#"><i class="fa-solid fa-cart-plus cart"></i></a>
-            </div>
+        <div id="loading" style="text-align: center; padding: 40px; display: none;">
+          <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #088178;"></i>
+          <p>Đang tải sản phẩm...</p>
+        </div>
+        <div class="pro-container" id="products-container">
+            <!-- Products will be loaded here -->
             <div class="pro" onclick="window.location.href='sproduct8.html';">
                 <img src="./products/zz6.jpg" alt="">
                 <div class="desc">
@@ -439,6 +353,7 @@
     </div>
     <script src="script.js"></script>
     <script src="common.js"></script>
+    <script src="shop.js"></script>
     <button id="back-to-top" class="back-to-top">↑</button>
 </body>
 </html>

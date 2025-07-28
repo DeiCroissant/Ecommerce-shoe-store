@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - Shoe Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .product-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .product-images {
+            position: relative;
+        }
+        
+        .main-image-container {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .thumbnail-images {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail:hover {
+            border-color: #088178;
+            transform: scale(1.05);
+        }
+        
+        .thumbnail.active {
+            border-color: #088178;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-brand {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .product-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #088178;
+            margin-bottom: 20px;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+        }
+        
+        .rating-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .size-selection {
+            margin-bottom: 30px;
+        }
+        
+        .size-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .size-option {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .size-option:hover {
+            border-color: #088178;
+        }
+        
+        .size-option.selected {
+            background: #088178;
+            color: white;
+            border-color: #088178;
+        }
+        
+        .size-option.disabled {
+            background: #f8f9fa;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .quantity-selection {
+            margin-bottom: 30px;
+        }
+        
+        .quantity-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            border-color: #088178;
+            color: #088178;
+        }
+        
+        .quantity-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .quantity-input:focus {
+            outline: none;
+            border-color: #088178;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 15px;
+            background: #088178;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: #066d66;
+            transform: translateY(-2px);
+        }
+        
+        .add-to-cart-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .product-details {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .details-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .size-chart {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .size-chart th,
+        .size-chart td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .size-chart th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .size-chart td {
+            color: #666;
+        }
+        
+        .size-chart img {
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+        }
+        
+        .disclaimer {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .loading i {
+            font-size: 2rem;
+            color: #088178;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .product-name {
+                font-size: 1.5rem;
+            }
+            
+            .product-price {
+                font-size: 2rem;
+            }
+            
+            .thumbnail-images {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="logo.png" class="logo" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
+                <li id="auth-links">
+                    <a href="login.html" id="login-link"><i class="fas fa-user"></i></a>
+                </li>
+                <li id="user-info" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" class="user-dropdown-toggle" id="user-email">
+                            <i class="fas fa-user"></i>
+                            <span id="user-email-text">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown-menu">
+                            <div class="user-info-header">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="dropdown-user-email">User</span>
+                            </div>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="user.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                            <a href="admin.html" class="dropdown-item admin-link" style="display: none;">
+                                <i class="fas fa-crown"></i>
+                                Admin Panel
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-edit"></i>
+                                Hồ sơ
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                Đơn hàng
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <button class="dropdown-item logout-btn" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="mobile">
+            <i class="fas fa-bars"></i>
+        </div>
+    </section>
+
+    <!-- Product Detail Content -->
+    <div class="product-detail-container">
+        <!-- Messages -->
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        <div id="success-message" class="success-message" style="display: none;"></div>
+
+        <!-- Loading -->
+        <div id="loading" class="loading" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Đang tải thông tin sản phẩm...</p>
+        </div>
+
+        <!-- Product Detail -->
+        <div id="product-detail" style="display: none;">
+            <div class="product-detail-grid">
+                <!-- Product Images -->
+                <div class="product-images">
+                    <div class="main-image-container">
+                        <img id="main-image" class="main-image" src="" alt="Product">
+                    </div>
+                    <div class="thumbnail-images" id="thumbnail-images">
+                        <!-- Thumbnails will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info">
+                    <div class="product-brand" id="product-brand">Basas</div>
+                    <h1 class="product-name" id="product-name">Product Name</h1>
+                    <div class="product-price" id="product-price">$0.00</div>
+                    
+                    <div class="product-rating">
+                        <div class="stars" id="product-stars">★★★★★</div>
+                        <span class="rating-text" id="rating-text">(5/5)</span>
+                    </div>
+                    
+                    <div class="product-description" id="product-description">
+                        Mô tả sản phẩm sẽ được hiển thị ở đây...
+                    </div>
+                    
+                    <!-- Size Selection -->
+                    <div class="size-selection">
+                        <label class="size-label">Chọn size</label>
+                        <div class="size-options" id="size-options">
+                            <!-- Size options will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Quantity Selection -->
+                    <div class="quantity-selection">
+                        <label class="quantity-label">Số lượng</label>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <input type="number" class="quantity-input" id="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" onclick="addToCart()" id="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add To Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="product-details">
+                <h2 class="details-title">Product Details</h2>
+                
+                <table class="size-chart">
+                    <thead>
+                        <tr>
+                            <th>EUR</th>
+                            <th>US</th>
+                            <th>UK</th>
+                            <th>CM <img src="products/Ananas_SizeChart.jpg" alt="Foot"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>35</td><td>3.5</td><td>3</td><td>22</td></tr>
+                        <tr><td>36</td><td>4</td><td>3.5</td><td>22.5</td></tr>
+                        <tr><td>37</td><td>4.5</td><td>4</td><td>23</td></tr>
+                        <tr><td>38</td><td>5</td><td>4.5</td><td>23.5</td></tr>
+                        <tr><td>39</td><td>5.5</td><td>5</td><td>24</td></tr>
+                        <tr><td>40</td><td>6</td><td>5.5</td><td>24.5</td></tr>
+                        <tr><td>41</td><td>6.5</td><td>6</td><td>25</td></tr>
+                        <tr><td>42</td><td>7</td><td>6.5</td><td>25.5</td></tr>
+                        <tr><td>43</td><td>7.5</td><td>7</td><td>26</td></tr>
+                        <tr><td>44</td><td>8</td><td>7.5</td><td>26.5</td></tr>
+                        <tr><td>45</td><td>8.5</td><td>8</td><td>27</td></tr>
+                        <tr><td>46</td><td>9</td><td>8.5</td><td>27.5</td></tr>
+                    </tbody>
+                </table>
+                
+                <div class="disclaimer">
+                    • Giống như các bảng size khác trong ngành giày dép, Ananas Size Chart không thể hướng dẫn bạn chọn size vừa vặn hoàn hảo, vì luôn có sự khác biệt về kích thước giữa bàn chân của bạn và bàn chân của model.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="sproduct_detail.js"></script>
+</body>
+</html> 

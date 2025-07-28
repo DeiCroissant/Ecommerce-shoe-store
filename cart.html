@@ -9,11 +9,10 @@
 </head>
 <body>
     <!-- Topbar giống Ananas -->
-    <div class="topbar">
-      <ul class="topbar-list">
-        <li><a href="auth.html" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
-      </ul>
-    </div>
+          <div class="topbar">
+        <ul class="topbar-list">
+        </ul>
+      </div>
 
     <section id="header">
         <a href="#"><img src="logo.png"  class="logo" alt=""></a>
@@ -24,6 +23,46 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a class="active" href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li id="auth-links">
+                    <a href="login.html" id="login-link"><i class="fas fa-user"></i></a>
+                </li>
+                <li id="user-info" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" class="user-dropdown-toggle" id="user-email">
+                            <i class="fas fa-user"></i>
+                            <span id="user-email-text">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown-menu">
+                            <div class="user-info-header">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="dropdown-user-email">User</span>
+                            </div>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="user.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                            <a href="admin.html" class="dropdown-item admin-link" style="display: none;">
+                                <i class="fas fa-crown"></i>
+                                Admin Panel
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-edit"></i>
+                                Hồ sơ
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                Đơn hàng
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <button class="dropdown-item logout-btn" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </section>
@@ -50,30 +89,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="./products/f1.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-shirts</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="./products/f2.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-shirts</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                    <td><img src="./products/f3.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-shirts</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
+                <!-- Sản phẩm sẽ được render tự động bằng JS từ localStorage -->
             </tbody>
         </table>
     </section>
@@ -82,11 +98,47 @@
     <section id="cart-add" class="section-p1">
         <div id="coupon"> 
             <h3>Apply Coupon</h3>
-            <div>
+            <div style="display: flex; gap: 10px; align-items: center;">
                 <input type="text" placeholder="Enter Your Coupon">
                 <button class="normal">Apply</button>
+                <button class="btn btn-danger" id="remove-coupon-btn" style="display:none;">Xóa mã</button>
             </div>
         </div>
+        
+        <div id="shipping-address">
+            <h3>Địa chỉ giao hàng</h3>
+            <div class="address-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullname">Họ và tên *</label>
+                        <input type="text" id="fullname" placeholder="Nhập họ và tên" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại *</label>
+                        <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ chi tiết *</label>
+                    <textarea id="address" placeholder="Nhập địa chỉ chi tiết (số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố)" rows="3" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">Tỉnh/Thành phố *</label>
+                        <input type="text" id="city" placeholder="Nhập tỉnh/thành phố" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">Quận/Huyện *</label>
+                        <input type="text" id="district" placeholder="Nhập quận/huyện" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="note">Ghi chú</label>
+                    <textarea id="note" placeholder="Ghi chú cho đơn hàng (không bắt buộc)" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+        
         <div id="subtotal">
             <h3>Carts Total</h3>
             <table>
@@ -160,5 +212,6 @@
     <!-- XÓA toàn bộ code modal đăng nhập/đăng ký cũ và JS liên quan -->
 <script src="script.js"></script>
 <script src="common.js"></script>
+<script src="cart.js"></script>
 </body>
 </html>

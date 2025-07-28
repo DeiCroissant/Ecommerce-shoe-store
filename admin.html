@@ -1,214 +1,489 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body { background: #f4f6fa; }
-    .admin-header { background: #222; color: #fff; padding: 18px 32px; font-size: 22px; font-weight: bold; letter-spacing: 1px; }
-    .admin-layout { display: flex; min-height: 100vh; }
-    .admin-sidebar { width: 220px; background: #fff; box-shadow: 2px 0 8px rgba(0,0,0,0.04); padding: 32px 0; }
-    .admin-sidebar ul { list-style: none; padding: 0; }
-    .admin-sidebar li { margin: 18px 0; }
-    .admin-sidebar a { color: #222; text-decoration: none; font-weight: 500; padding: 10px 32px; display: block; border-left: 4px solid transparent; transition: 0.2s; }
-    .admin-sidebar a.active, .admin-sidebar a:hover { background: #f0f0f0; border-left: 4px solid #f37021; color: #f37021; }
-    .admin-content { flex: 1; padding: 40px; }
-    .admin-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 32px; margin-bottom: 32px; }
-    .admin-title { font-size: 20px; font-weight: bold; margin-bottom: 18px; }
-    .admin-table { width: 100%; border-collapse: collapse; }
-    .admin-table th, .admin-table td { padding: 10px 14px; border-bottom: 1px solid #eee; text-align: left; }
-    .admin-table th { background: #f8f8f8; }
-    .admin-btn { background: #f37021; color: #fff; border: none; border-radius: 4px; padding: 6px 14px; cursor: pointer; margin-right: 6px; font-size: 14px; }
-    .admin-btn.danger { background: #e74c3c; }
-    @media (max-width: 900px) {
-      .admin-layout { flex-direction: column; }
-      .admin-sidebar { width: 100%; box-shadow: none; padding: 12px 0; }
-      .admin-content { padding: 16px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Shoe Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Admin specific styles */
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .admin-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .admin-header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #088178;
+        }
+        
+        .stat-card i {
+            font-size: 3rem;
+            color: #088178;
+            margin-bottom: 15px;
+        }
+        
+        .stat-card h3 {
+            margin: 10px 0;
+            color: #333;
+            font-size: 1.5rem;
+        }
+        
+        .stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .admin-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .action-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+        
+        .action-card h3 {
+            color: #088178;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .action-card h3 i {
+            font-size: 1.2rem;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f3f4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .action-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .action-btn {
+            background: #088178;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: #066d66;
+        }
+        
+        .action-btn.danger {
+            background: #dc3545;
+        }
+        
+        .action-btn.danger:hover {
+            background: #c82333;
+        }
+        
+        .admin-section {
+            background: #f8f9fa;
+            padding: 40px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .admin-welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .admin-welcome h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .admin-welcome p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .quick-action-btn {
+            background: white;
+            border: 2px solid #088178;
+            color: #088178;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .quick-action-btn:hover {
+            background: #088178;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .quick-action-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .admin-alert {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-alert i {
+            font-size: 1.2rem;
+        }
+    </style>
 </head>
 <body>
-  <div class="admin-header">Admin Dashboard</div>
-  <div class="admin-layout">
-    <nav class="admin-sidebar">
-      <ul>
-        <li><a href="#" class="active" id="tab-products">Quản lý sản phẩm</a></li>
-        <li><a href="#" id="tab-orders">Quản lý đơn hàng</a></li>
-        <li><a href="#" id="tab-users">Quản lý người dùng</a></li>
-        <li><a href="#" id="admin-logout">Đăng xuất</a></li>
-      </ul>
-    </nav>
-    <main class="admin-content">
-      <div class="admin-card" id="products-section">
-        <div class="admin-title">Sản phẩm mới nhất</div>
-        <table class="admin-table">
-          <tr><th>Tên sản phẩm</th><th>Giá</th><th>Trạng thái</th></tr>
-          <tr><td>Basas Bumper Gum EXT NE</td><td>$19.99</td><td>Còn hàng</td></tr>
-          <tr><td>Vintas Denim - High Top</td><td>$199.99</td><td>Hết hàng</td></tr>
-          <tr><td>Pattas Polka Dots</td><td>$199.99</td><td>Còn hàng</td></tr>
-        </table>
-      </div>
-      <div class="admin-card" id="orders-section" style="display:none;">
-        <div class="admin-title">Quản lý đơn hàng</div>
-        <table class="admin-table" id="orders-table">
-          <thead>
-            <tr><th>Mã đơn</th><th>Khách hàng</th><th>Tổng tiền</th><th>Trạng thái</th><th>Hành động</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="admin-card" id="users-section" style="display:none;">
-        <div class="admin-title">Quản lý người dùng</div>
-        <table class="admin-table" id="users-table">
-          <thead>
-            <tr><th>Email</th><th>Loại tài khoản</th><th>Hành động</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </main>
-  </div>
-  <script>
-    // Bảo vệ trang admin: chỉ cho phép admin truy cập
-    if (localStorage.getItem('isAdmin') !== 'true') {
-      window.location.href = 'index.html';
-    }
-    // Đăng xuất admin
-    document.getElementById('admin-logout').onclick = function(e) {
-      e.preventDefault();
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('isAdmin');
-      window.location.href = 'index.html';
-    };
+    <!-- Header -->
+    <section id="header">
+        <a href="index.html"><img src="logo.png" class="logo" alt="Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
+                <li id="auth-links">
+                    <a href="login.html" id="login-link"><i class="fas fa-user"></i></a>
+                </li>
+                <li id="user-info" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" class="user-dropdown-toggle" id="user-email">
+                            <i class="fas fa-user"></i>
+                            <span id="user-email-text">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown-menu">
+                            <div class="user-info-header">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="dropdown-user-email">User</span>
+                            </div>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="user.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-edit"></i>
+                                Hồ sơ
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                Đơn hàng
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <button class="dropdown-item logout-btn" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="mobile">
+            <i class="fas fa-bars"></i>
+        </div>
+    </section>
 
-    // Tab logic
-    const tabProducts = document.getElementById('tab-products');
-    const tabOrders = document.getElementById('tab-orders');
-    const tabUsers = document.getElementById('tab-users');
-    const productsSection = document.getElementById('products-section');
-    const ordersSection = document.getElementById('orders-section');
-    const usersSection = document.getElementById('users-section');
-    tabProducts.onclick = function(e) {
-      e.preventDefault();
-      tabProducts.classList.add('active');
-      tabOrders.classList.remove('active');
-      tabUsers.classList.remove('active');
-      productsSection.style.display = '';
-      ordersSection.style.display = 'none';
-      usersSection.style.display = 'none';
-    };
-    tabOrders.onclick = function(e) {
-      e.preventDefault();
-      tabProducts.classList.remove('active');
-      tabOrders.classList.add('active');
-      tabUsers.classList.remove('active');
-      productsSection.style.display = 'none';
-      ordersSection.style.display = '';
-      usersSection.style.display = 'none';
-    };
-    tabUsers.onclick = function(e) {
-      e.preventDefault();
-      tabProducts.classList.remove('active');
-      tabOrders.classList.remove('active');
-      tabUsers.classList.add('active');
-      productsSection.style.display = 'none';
-      ordersSection.style.display = 'none';
-      usersSection.style.display = '';
-    };
+    <!-- Admin Header -->
+    <section class="admin-header">
+        <div class="container">
+            <h1>Admin Dashboard</h1>
+            <p>Quản lý hệ thống và theo dõi hoạt động</p>
+        </div>
+    </section>
 
-    // Dữ liệu mẫu đơn hàng và người dùng (demo, lưu localStorage)
-    const defaultOrders = [
-      {id: '1001', customer: 'Nguyễn Văn A', total: 199.99, status: 'Đã giao'},
-      {id: '1002', customer: 'Trần Thị B', total: 19.99, status: 'Đang xử lý'},
-      {id: '1003', customer: 'Lê Văn C', total: 299.99, status: 'Đã hủy'}
-    ];
-    const defaultUsers = [
-      {email: 'admin@example.com', type: 'Admin'},
-      {email: 'user1@example.com', type: 'User'},
-      {email: 'user2@example.com', type: 'User'}
-    ];
-    function getOrders() {
-      return JSON.parse(localStorage.getItem('adminOrders') || 'null') || defaultOrders;
-    }
-    function setOrders(orders) {
-      localStorage.setItem('adminOrders', JSON.stringify(orders));
-    }
-    function getUsers() {
-      return JSON.parse(localStorage.getItem('adminUsers') || 'null') || defaultUsers;
-    }
-    function setUsers(users) {
-      localStorage.setItem('adminUsers', JSON.stringify(users));
-    }
-    // Render orders
-    function renderOrders() {
-      const orders = getOrders();
-      const tbody = document.querySelector('#orders-table tbody');
-      tbody.innerHTML = '';
-      orders.forEach((order, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${order.id}</td>
-          <td>${order.customer}</td>
-          <td>$${order.total.toFixed(2)}</td>
-          <td>
-            <select class="order-status" data-idx="${idx}">
-              <option${order.status==='Đang xử lý'?' selected':''}>Đang xử lý</option>
-              <option${order.status==='Đã giao'?' selected':''}>Đã giao</option>
-              <option${order.status==='Đã hủy'?' selected':''}>Đã hủy</option>
-            </select>
-          </td>
-          <td><button class="admin-btn danger" data-idx="${idx}">Xóa</button></td>
-        `;
-        tbody.appendChild(tr);
-      });
-      // Sự kiện đổi trạng thái
-      tbody.querySelectorAll('.order-status').forEach(sel => {
-        sel.onchange = function() {
-          const orders = getOrders();
-          orders[this.dataset.idx].status = this.value;
-          setOrders(orders);
-          renderOrders();
-        };
-      });
-      // Sự kiện xóa
-      tbody.querySelectorAll('.admin-btn.danger').forEach(btn => {
-        btn.onclick = function() {
-          let orders = getOrders();
-          orders.splice(this.dataset.idx, 1);
-          setOrders(orders);
-          renderOrders();
-        };
-      });
-    }
-    // Render users
-    function renderUsers() {
-      const users = getUsers();
-      const tbody = document.querySelector('#users-table tbody');
-      tbody.innerHTML = '';
-      users.forEach((user, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${user.email}</td>
-          <td>${user.type}</td>
-          <td>${user.type !== 'Admin' ? `<button class="admin-btn danger" data-idx="${idx}">Xóa</button>` : ''}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-      // Sự kiện xóa user
-      tbody.querySelectorAll('.admin-btn.danger').forEach(btn => {
-        btn.onclick = function() {
-          let users = getUsers();
-          users.splice(this.dataset.idx, 1);
-          setUsers(users);
-          renderUsers();
-        };
-      });
-    }
-    // Khởi tạo
-    renderOrders();
-    renderUsers();
-  </script>
+    <!-- Admin Content -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-welcome">
+                <h2>Chào mừng, <span id="admin-email">Admin</span>!</h2>
+                <p>Đây là trang quản trị hệ thống. Bạn có thể quản lý người dùng, sản phẩm và đơn hàng tại đây.</p>
+            </div>
+
+            <!-- Admin Alert -->
+            <div class="admin-alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Bạn đang truy cập với quyền Admin. Hãy cẩn thận khi thực hiện các thay đổi quan trọng.</span>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <a href="#" class="quick-action-btn" onclick="manageUsers()">
+                    <i class="fas fa-users"></i>
+                    Quản lý người dùng
+                </a>
+                <a href="#" class="quick-action-btn" onclick="manageProducts()">
+                    <i class="fas fa-box"></i>
+                    Quản lý sản phẩm
+                </a>
+                <a href="#" class="quick-action-btn" onclick="manageOrders()">
+                    <i class="fas fa-shopping-cart"></i>
+                    Quản lý đơn hàng
+                </a>
+                <a href="#" class="quick-action-btn" onclick="viewAnalytics()">
+                    <i class="fas fa-chart-bar"></i>
+                    Thống kê
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3 id="total-users">0</h3>
+                    <p>Tổng người dùng</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-box"></i>
+                    <h3 id="total-products">0</h3>
+                    <p>Tổng sản phẩm</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3 id="total-orders">0</h3>
+                    <p>Tổng đơn hàng</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3 id="total-revenue">$0</h3>
+                    <p>Doanh thu</p>
+                </div>
+            </div>
+
+            <!-- Admin Actions -->
+            <div class="admin-actions">
+                <div class="action-card">
+                    <h3><i class="fas fa-users"></i> Quản lý người dùng</h3>
+                    <ul class="action-list">
+                        <li>
+                            <span>Xem danh sách người dùng</span>
+                            <button class="action-btn" onclick="viewUsers()">Xem</button>
+                        </li>
+                        <li>
+                            <span>Thêm người dùng mới</span>
+                            <button class="action-btn" onclick="addUser()">Thêm</button>
+                        </li>
+                        <li>
+                            <span>Chỉnh sửa quyền</span>
+                            <button class="action-btn" onclick="editUserRoles()">Sửa</button>
+                        </li>
+                        <li>
+                            <span>Xóa người dùng</span>
+                            <button class="action-btn danger" onclick="deleteUser()">Xóa</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="action-card">
+                    <h3><i class="fas fa-box"></i> Quản lý sản phẩm</h3>
+                    <ul class="action-list">
+                        <li>
+                            <span>Xem danh sách sản phẩm</span>
+                            <button class="action-btn" onclick="viewProducts()">Xem</button>
+                        </li>
+                        <li>
+                            <span>Thêm sản phẩm mới</span>
+                            <button class="action-btn" onclick="addProduct()">Thêm</button>
+                        </li>
+                        <li>
+                            <span>Chỉnh sửa sản phẩm</span>
+                            <button class="action-btn" onclick="editProduct()">Sửa</button>
+                        </li>
+                        <li>
+                            <span>Xóa sản phẩm</span>
+                            <button class="action-btn danger" onclick="deleteProduct()">Xóa</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="action-card">
+                    <h3><i class="fas fa-shopping-cart"></i> Quản lý đơn hàng</h3>
+                    <ul class="action-list">
+                        <li>
+                            <span>Xem tất cả đơn hàng</span>
+                            <button class="action-btn" onclick="viewOrders()">Xem</button>
+                        </li>
+                        <li>
+                            <span>Cập nhật trạng thái</span>
+                            <button class="action-btn" onclick="updateOrderStatus()">Cập nhật</button>
+                        </li>
+                        <li>
+                            <span>Xem chi tiết đơn hàng</span>
+                            <button class="action-btn" onclick="viewOrderDetails()">Chi tiết</button>
+                        </li>
+                        <li>
+                            <span>Xuất báo cáo</span>
+                            <button class="action-btn" onclick="exportOrders()">Xuất</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="action-card">
+                    <h3><i class="fas fa-cog"></i> Cài đặt hệ thống</h3>
+                    <ul class="action-list">
+                        <li>
+                            <span>Cài đặt chung</span>
+                            <button class="action-btn" onclick="generalSettings()">Cài đặt</button>
+                        </li>
+                        <li>
+                            <span>Quản lý backup</span>
+                            <button class="action-btn" onclick="backupSystem()">Backup</button>
+                        </li>
+                        <li>
+                            <span>Xem logs hệ thống</span>
+                            <button class="action-btn" onclick="viewLogs()">Logs</button>
+                        </li>
+                        <li>
+                            <span>Bảo mật</span>
+                            <button class="action-btn" onclick="securitySettings()">Bảo mật</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Đăng ký nhận thông báo</h4>
+            <p>Nhận email về sản phẩm mới và <span>ưu đãi đặc biệt</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="Email của bạn">
+            <button class="normal">Đăng ký</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="logo.png" alt="Logo">
+            <h4>Liên hệ</h4>
+            <p><strong>Địa chỉ:</strong> 123 Đường ABC, Quận 1, TP.HCM</p>
+            <p><strong>Điện thoại:</strong> +84 123 456 789</p>
+            <p><strong>Giờ làm việc:</strong> 8:00 - 22:00, Thứ 2 - Chủ nhật</p>
+            <div class="follow">
+                <h4>Theo dõi chúng tôi</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>Về chúng tôi</h4>
+            <a href="#">Về chúng tôi</a>
+            <a href="#">Thông tin giao hàng</a>
+            <a href="#">Chính sách bảo mật</a>
+            <a href="#">Điều khoản & Điều kiện</a>
+            <a href="#">Liên hệ chúng tôi</a>
+        </div>
+
+        <div class="col">
+            <h4>Tài khoản</h4>
+            <a href="#">Đăng nhập</a>
+            <a href="#">Xem giỏ hàng</a>
+            <a href="#">Danh sách yêu thích</a>
+            <a href="#">Theo dõi đơn hàng</a>
+            <a href="#">Trợ giúp</a>
+        </div>
+
+        <div class="col install">
+            <h4>Cài đặt ứng dụng</h4>
+            <p>Từ App Store hoặc Google Play</p>
+            <div class="row">
+                <img src="pay/app.jpg" alt="App Store">
+                <img src="pay/play.jpg" alt="Google Play">
+            </div>
+            <p>Thanh toán an toàn</p>
+            <img src="pay/pay.png" alt="Payment Methods">
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2024, Shoe Store - Tất cả quyền được bảo lưu</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html> 

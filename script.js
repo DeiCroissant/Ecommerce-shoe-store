@@ -20,7 +20,90 @@ document.querySelectorAll('.category-item').forEach(function(item) {
 var defaultCat = document.querySelector('.category-item[data-tag="all"]');
 if(defaultCat) defaultCat.classList.add('selected');
 
-// ĐÃ XÓA: Toàn bộ code xử lý modal đăng nhập, tab đăng nhập/đăng ký, form đăng nhập/đăng ký demo
+// Kiểm tra trạng thái đăng nhập và hiển thị thông tin user
+function checkAuthStatus() {
+    const token = localStorage.getItem('token');
+    const email = localStorage.getItem('email');
+    
+    const authLinks = document.getElementById('auth-links');
+    const userInfo = document.getElementById('user-info');
+    const userEmail = document.getElementById('user-email-text');
+    const dropdownUserEmail = document.getElementById('dropdown-user-email');
+    
+    if (token && email && authLinks && userInfo && userEmail) {
+        // User đã đăng nhập
+        authLinks.style.display = 'none';
+        userInfo.style.display = 'block';
+        userEmail.textContent = email;
+        if (dropdownUserEmail) {
+            dropdownUserEmail.textContent = email;
+        }
+        
+        // Kiểm tra role admin và hiển thị Admin Panel link
+        const userRole = localStorage.getItem('userRole');
+        const adminLink = document.querySelector('.admin-link');
+        if (adminLink) {
+            if (userRole === 'admin') {
+                adminLink.style.display = 'flex';
+            } else {
+                adminLink.style.display = 'none';
+            }
+        }
+    } else if (authLinks && userInfo) {
+        // User chưa đăng nhập - chỉ hiển thị link đăng nhập
+        authLinks.style.display = 'block';
+        userInfo.style.display = 'none';
+    }
+}
+
+// Đăng xuất
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('showWelcome');
+    
+    // Reload trang để cập nhật UI
+    window.location.reload();
+}
+
+// Chạy kiểm tra auth khi trang load
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuthStatus();
+    setupUserDropdown();
+    if (document.getElementById('featured-products-container')) {
+        loadFeaturedProducts();
+    }
+});
+
+// Setup user dropdown functionality
+function setupUserDropdown() {
+    const userDropdown = document.querySelector('.user-dropdown');
+    const dropdownToggle = document.querySelector('.user-dropdown-toggle');
+    
+    if (userDropdown && dropdownToggle) {
+        // Toggle dropdown khi click
+        dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            userDropdown.classList.toggle('active');
+        });
+        
+        // Đóng dropdown khi click outside
+        document.addEventListener('click', function(e) {
+            if (!userDropdown.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+        
+        // Đóng dropdown khi click vào item
+        const dropdownItems = userDropdown.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', function() {
+                userDropdown.classList.remove('active');
+            });
+        });
+    }
+}
 
 // Event chuyển hướng cho nút Shop now trên trang chủ
 var shopNowBtn = document.getElementById('shop-now-btn');
@@ -183,4 +266,45 @@ if ('scrollBehavior' in document.documentElement.style) {
       }
     });
   });
+}
+
+async function loadFeaturedProducts() {
+    const container = document.getElementById('featured-products-container');
+    if (!container) return;
+    container.innerHTML = '<div style="text-align:center;width:100%">Đang tải sản phẩm...</div>';
+    try {
+        const response = await fetch('http://localhost:3000/api/products');
+        const data = await response.json();
+        if (data.success && Array.isArray(data.products)) {
+            if (data.products.length === 0) {
+                container.innerHTML = '<div style="text-align:center;width:100%">Chưa có sản phẩm nào</div>';
+                return;
+            }
+            container.innerHTML = data.products.map(product => {
+                let imgSrc = product.mainImage
+                    ? (product.mainImage.startsWith('products/') ? `/${product.mainImage}` : `/products/${product.mainImage}`)
+                    : 'products/f1.jpg';
+                return `
+                <div class="pro" onclick="window.location.href='sproduct_detail.html?id=${product._id}'">
+                    <img src="${imgSrc}" alt="${product.name}">
+                    <div class="desc">
+                        <h5>${product.name}</h5>
+                        <div class="star">
+                            ${'<i class=\'fas fa-star\'></i>'.repeat(product.rating || 0)}
+                            ${'<i class=\'far fa-star\'></i>'.repeat(5 - (product.rating || 0))}
+                        </div>
+                    </div>
+                    <div class="pro-bottom">
+                        <h4>${product.price ? product.price.toLocaleString('vi-VN') + '₫' : '0₫'}</h4>
+                        <a href="sproduct_detail.html?id=${product._id}" onclick="event.stopPropagation()"><i class="ri-shopping-cart-line cart"></i></a>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        } else {
+            container.innerHTML = '<div style="text-align:center;width:100%">Không thể tải sản phẩm!</div>';
+        }
+    } catch (error) {
+        container.innerHTML = '<div style="text-align:center;width:100%">Lỗi kết nối server!</div>';
+    }
 }

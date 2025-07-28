@@ -51,8 +51,6 @@ function setupTabModal() {
     });
   });
 }
-// Export
-export { setupHamburgerMenu, setupBackToTop, setupSmoothScroll, setupTabModal };
 
 document.addEventListener('DOMContentLoaded', function() {
   const loginBtn = document.getElementById('login-btn');
@@ -80,6 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } else if (loginBtn) {
     loginBtn.innerHTML = '<i class="fa fa-user"></i> Đăng nhập';
-    loginBtn.setAttribute('href', 'auth.html');
+    loginBtn.setAttribute('href', 'login.html');
   }
 }); 

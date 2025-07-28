@@ -9,11 +9,10 @@
 </head>
 <body>
     <!-- Topbar giống Ananas -->
-    <div class="topbar">
-      <ul class="topbar-list">
-        <li><a href="auth.html" id="login-btn"><i class="fa fa-user"></i> Đăng nhập</a></li>
-      </ul>
-    </div>
+          <div class="topbar">
+        <ul class="topbar-list">
+        </ul>
+      </div>
 
     <section id="header">
         <a href="#"><img src="logo.png"  class="logo" alt=""></a>
@@ -24,6 +23,46 @@
                 <li><a class="active" href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="cart.html" class="cart-link"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge">0</span></a></li>
+                <li id="auth-links">
+                    <a href="login.html" id="login-link"><i class="fas fa-user"></i></a>
+                </li>
+                <li id="user-info" style="display: none;">
+                    <div class="user-dropdown">
+                        <a href="#" class="user-dropdown-toggle" id="user-email">
+                            <i class="fas fa-user"></i>
+                            <span id="user-email-text">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="user-dropdown-menu">
+                            <div class="user-info-header">
+                                <i class="fas fa-user-circle"></i>
+                                <span id="dropdown-user-email">User</span>
+                            </div>
+                            <div class="user-dropdown-divider"></div>
+                            <a href="user.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                            <a href="admin.html" class="dropdown-item admin-link" style="display: none;">
+                                <i class="fas fa-crown"></i>
+                                Admin Panel
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-edit"></i>
+                                Hồ sơ
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                Đơn hàng
+                            </a>
+                            <div class="user-dropdown-divider"></div>
+                            <button class="dropdown-item logout-btn" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </button>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </section>
