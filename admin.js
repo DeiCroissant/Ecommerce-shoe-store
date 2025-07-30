@@ -117,14 +117,6 @@ function viewUsers() {
     window.location.href = 'user_management.html';
 }
 
-function addUser() {
-    alert('Thêm người dùng mới - Đang phát triển!');
-}
-
-function editUserRoles() {
-    alert('Chỉnh sửa quyền người dùng - Đang phát triển!');
-}
-
 function deleteUser() {
     if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
         alert('Xóa người dùng - Đang phát triển!');
@@ -134,14 +126,6 @@ function deleteUser() {
 // Product Management
 function viewProducts() {
     window.location.href = 'product_management.html';
-}
-
-function addProduct() {
-    alert('Thêm sản phẩm mới - Đang phát triển!');
-}
-
-function editProduct() {
-    alert('Chỉnh sửa sản phẩm - Đang phát triển!');
 }
 
 function deleteProduct() {
@@ -155,34 +139,7 @@ function viewOrders() {
     window.location.href = 'order_management.html';
 }
 
-function updateOrderStatus() {
-    alert('Cập nhật trạng thái đơn hàng - Đang phát triển!');
-}
 
-function viewOrderDetails() {
-    alert('Xem chi tiết đơn hàng - Đang phát triển!');
-}
-
-function exportOrders() {
-    alert('Xuất báo cáo đơn hàng - Đang phát triển!');
-}
-
-// System Settings
-function generalSettings() {
-    alert('Cài đặt chung hệ thống - Đang phát triển!');
-}
-
-function backupSystem() {
-    alert('Quản lý backup hệ thống - Đang phát triển!');
-}
-
-function viewLogs() {
-    alert('Xem logs hệ thống - Đang phát triển!');
-}
-
-function securitySettings() {
-    alert('Cài đặt bảo mật - Đang phát triển!');
-}
 
 // Logout function
 function logout() {

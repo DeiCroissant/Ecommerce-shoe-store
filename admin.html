@@ -235,14 +235,6 @@
                                 <i class="fas fa-tachometer-alt"></i>
                                 Dashboard
                             </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-user-edit"></i>
-                                Hồ sơ
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-shopping-bag"></i>
-                                Đơn hàng
-                            </a>
                             <div class="user-dropdown-divider"></div>
                             <button class="dropdown-item logout-btn" onclick="logout()">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -334,14 +326,6 @@
                             <button class="action-btn" onclick="viewUsers()">Xem</button>
                         </li>
                         <li>
-                            <span>Thêm người dùng mới</span>
-                            <button class="action-btn" onclick="addUser()">Thêm</button>
-                        </li>
-                        <li>
-                            <span>Chỉnh sửa quyền</span>
-                            <button class="action-btn" onclick="editUserRoles()">Sửa</button>
-                        </li>
-                        <li>
                             <span>Xóa người dùng</span>
                             <button class="action-btn danger" onclick="deleteUser()">Xóa</button>
                         </li>
@@ -354,14 +338,6 @@
                         <li>
                             <span>Xem danh sách sản phẩm</span>
                             <button class="action-btn" onclick="viewProducts()">Xem</button>
-                        </li>
-                        <li>
-                            <span>Thêm sản phẩm mới</span>
-                            <button class="action-btn" onclick="addProduct()">Thêm</button>
-                        </li>
-                        <li>
-                            <span>Chỉnh sửa sản phẩm</span>
-                            <button class="action-btn" onclick="editProduct()">Sửa</button>
                         </li>
                         <li>
                             <span>Xóa sản phẩm</span>
@@ -377,42 +353,10 @@
                             <span>Xem tất cả đơn hàng</span>
                             <button class="action-btn" onclick="viewOrders()">Xem</button>
                         </li>
-                        <li>
-                            <span>Cập nhật trạng thái</span>
-                            <button class="action-btn" onclick="updateOrderStatus()">Cập nhật</button>
-                        </li>
-                        <li>
-                            <span>Xem chi tiết đơn hàng</span>
-                            <button class="action-btn" onclick="viewOrderDetails()">Chi tiết</button>
-                        </li>
-                        <li>
-                            <span>Xuất báo cáo</span>
-                            <button class="action-btn" onclick="exportOrders()">Xuất</button>
-                        </li>
                     </ul>
                 </div>
 
-                <div class="action-card">
-                    <h3><i class="fas fa-cog"></i> Cài đặt hệ thống</h3>
-                    <ul class="action-list">
-                        <li>
-                            <span>Cài đặt chung</span>
-                            <button class="action-btn" onclick="generalSettings()">Cài đặt</button>
-                        </li>
-                        <li>
-                            <span>Quản lý backup</span>
-                            <button class="action-btn" onclick="backupSystem()">Backup</button>
-                        </li>
-                        <li>
-                            <span>Xem logs hệ thống</span>
-                            <button class="action-btn" onclick="viewLogs()">Logs</button>
-                        </li>
-                        <li>
-                            <span>Bảo mật</span>
-                            <button class="action-btn" onclick="securitySettings()">Bảo mật</button>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </div>
     </section>
